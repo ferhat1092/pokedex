@@ -24,7 +24,26 @@ header {
 .poke-card {
     padding: 24px;
     margin: 16px;
-    background-color: rgb(41, 58, 134);
+}
+
+.bg-grass {
+    background-color: green;
+}
+
+.bg-fire {
+    background-color: red;
+}
+
+.bg-water {
+    background-color: blue;
+}
+
+.bg-bug {
+    background-color: yellowgreen;
+}
+
+.bg-normal {
+    background-color: burlywood;
 }
 
 footer {

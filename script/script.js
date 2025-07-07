@@ -17,7 +17,7 @@ function render(detailsAboutPokemons) {
 
 function pokeCardsTemplate(pokemon) {
       return `
-               <div class="poke-card">
+               <div class="poke-card bg-${pokemon.types[0].type.name}">
                <h3>${pokemon.name.toUpperCase()}</h3>
                <img src="${pokemon.sprites.front_default}" alt="pokemon-pic">
                <p>${pokemon.types[0].type.name}</p>

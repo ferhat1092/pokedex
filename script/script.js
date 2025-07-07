@@ -4,7 +4,7 @@ function init(){
 
 async function getPokemons() {
     let responsPokemons = await fetch('https://pokeapi.co/api/v2/pokemon?limit=20&offset=0');
-    let pokemonsArr = await responsPokemons.json();
+    let pokemonsArr = [await responsPokemons.json()]
     render(pokemonsArr);
 };
 

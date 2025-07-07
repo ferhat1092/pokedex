@@ -20,6 +20,11 @@ header {
     height: 100vh;
 }
 
+.poke-card {
+    padding: 24px;
+    margin: 16px;
+}
+
 footer {
     display: flex;
     justify-content: center;

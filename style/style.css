@@ -25,7 +25,7 @@ header {
     background-color: #4CAF50;
     color: white;
     padding: 10px 20px;
-    margin: 24px;
+    margin: 8px;
     border: none;
     border-radius: 6px;
     cursor: pointer;
@@ -51,6 +51,10 @@ header {
     filter: brightness(1.2);
 }
 
+.poke-img {
+    height:88px;
+}
+
 .bg-grass {
     background-color: rgb(38, 129, 38);
 }
@@ -71,8 +75,29 @@ header {
     background-color: burlywood;
 }
 
+.bg-poison {
+    background-color: rgb(224, 87, 167);
+}
+
+.bg-electric {
+    background-color: rgb(218, 205, 89);
+}
+
+.bg-ground {
+    background-color: rgb(151, 142, 129);
+}
+
+.bg-fairy {
+    background-color: rgb(212, 94, 228);
+}
+
+.d-none {
+    display: none;
+}
+
 footer {
     display: flex;
     justify-content: center;
     background-color: rgb(107, 76, 76);
+    height: 80px;
 }

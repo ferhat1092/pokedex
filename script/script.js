@@ -1,16 +1,17 @@
 let currentOffset = 0;
 
-
 function init() {
     getPokemons();
 };
 
 async function getPokemons() {
+    document.getElementById('loader').classList.remove('d-none');
     let responsPokemons = await fetch(`https://pokeapi.co/api/v2/pokemon?limit=20&offset=${currentOffset}`);
     let pokemonsObj = await responsPokemons.json();
     let detailPromises = pokemonsObj.results.map(async (pokemon) => (await fetch(pokemon.url)).json());
     let detailsAboutPokemons = await Promise.all(detailPromises);
     render(detailsAboutPokemons);
+    document.getElementById('loader').classList.add('d-none');
 };
 
 function getMorePokemons() {

@@ -1,0 +1,35 @@
+.bg-grass {
+    background-color: rgb(38, 129, 38);
+}
+
+.bg-fire {
+    background-color: rgb(150, 41, 41);
+}
+
+.bg-water {
+    background-color: rgb(47, 47, 184);
+}
+
+.bg-bug {
+    background-color: yellowgreen;
+}
+
+.bg-normal {
+    background-color: burlywood;
+}
+
+.bg-poison {
+    background-color: rgb(224, 87, 167);
+}
+
+.bg-electric {
+    background-color: rgb(218, 205, 89);
+}
+
+.bg-ground {
+    background-color: rgb(151, 142, 129);
+}
+
+.bg-fairy {
+    background-color: rgb(212, 94, 228);
+}

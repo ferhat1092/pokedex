@@ -1,0 +1,19 @@
+
+.poke-card {
+    padding: 24px;
+    margin: 16px;
+    width: 160px;
+    height: 200px;
+    transition: all 0.3s ease;
+    border-radius: 16px;
+    cursor: pointer;
+}
+
+.poke-card:hover {
+    transform: scale(1.03);
+    filter: brightness(1.2);
+}
+
+.poke-img {
+    height:88px;
+}

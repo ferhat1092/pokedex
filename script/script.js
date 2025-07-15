@@ -27,10 +27,26 @@ function render(detailsAboutPokemons) {
 
 function pokeCardsTemplate(pokemon) {
     return `
-               <div class="poke-card bg-${pokemon.types[0].type.name}">
+               <div class="poke-card bg-${pokemon.types[0].type.name}" onclick="overlayPokmons(${pokemon})">
                <h3>${pokemon.name.toUpperCase()}</h3>
                <img class="poke-img"src="${pokemon.sprites.other.home.front_default}" alt="pokemon-pic">
                <p>${pokemon.types[0].type.name}</p>
                </div>
       `;
+};
+
+function overlayPokmons(pokemon) {
+    let mainContainerContentRef = document.getElementById('main_container');
+    mainContainerContentRef.innerHTML = pokeOverlayTemplate(pokemon).join('');
+};
+
+function pokeOverlayTemplate(pokemon) {
+    return `
+                <div class="overlay">
+                    <div class="poke-card-big bg-${pokemon.types[0].type.name}">
+                    <h3>${pokemon.name.toUpperCase()}</h3>
+                    <img class="poke-img"src="${pokemon.sprites.other.home.front_default}" alt="pokemon-pic">
+                    <p>${pokemon.types[0].type.name}</p></div>
+                </div>
+    `;
 };

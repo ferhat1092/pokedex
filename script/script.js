@@ -1,4 +1,5 @@
 let currentOffset = 0;
+let detailsAboutPokemonsArr = [];
 
 function init() {
     getPokemons();
@@ -9,8 +10,8 @@ async function getPokemons() {
     let responsPokemons = await fetch(`https://pokeapi.co/api/v2/pokemon?limit=20&offset=${currentOffset}`);
     let pokemonsObj = await responsPokemons.json();
     let detailPromises = pokemonsObj.results.map(async (pokemon) => (await fetch(pokemon.url)).json());
-    let detailsAboutPokemons = await Promise.all(detailPromises);
-    render(detailsAboutPokemons);
+    detailsAboutPokemonsArr = await Promise.all(detailPromises);
+    render(detailsAboutPokemonsArr);
     document.getElementById('loader').classList.add('d-none');
 };
 
@@ -20,14 +21,14 @@ function getMorePokemons() {
     document.getElementById('btn').classList.toggle('d-none');
 };
 
-function render(detailsAboutPokemons) {
+function render(detailsAboutPokemonsArr) {
     let mainContainerContentRef = document.getElementById('main_container');
-    mainContainerContentRef.innerHTML += detailsAboutPokemons.map((pokemon) => pokeCardsTemplate(pokemon)).join('');
+    mainContainerContentRef.innerHTML += detailsAboutPokemonsArr.map((pokemon) => pokeCardsTemplate(pokemon, detailsAboutPokemonsArr)).join('');    
 };
 
-function pokeCardsTemplate(pokemon) {
+function pokeCardsTemplate(pokemon, detailsAboutPokemonsArr) {
     return `
-               <div class="poke-card bg-${pokemon.types[0].type.name}" onclick="overlayPokmons(${pokemon})">
+               <div class="poke-card bg-${pokemon.types[0].type.name}" onclick="overlayPokemons()">
                <h3>${pokemon.name.toUpperCase()}</h3>
                <img class="poke-img"src="${pokemon.sprites.other.home.front_default}" alt="pokemon-pic">
                <p>${pokemon.types[0].type.name}</p>
@@ -35,18 +36,20 @@ function pokeCardsTemplate(pokemon) {
       `;
 };
 
-function overlayPokmons(pokemon) {
-    let mainContainerContentRef = document.getElementById('main_container');
-    mainContainerContentRef.innerHTML = pokeOverlayTemplate(pokemon).join('');
+function overlayPokemons(detailsAboutPokemonsArr) {
+    console.log(detailsAboutPokemonsArr);
+    
+    let overlayPokemonContentRef = document.getElementById('overlay_pokemon');
+    overlayPokemonContentRef = detailsAboutPokemonsArr.map((pokemons) => pokeOverlayTemplate(pokemons)).join('');    
 };
 
-function pokeOverlayTemplate(pokemon) {
+function pokeOverlayTemplate(pokemons) {
     return `
                 <div class="overlay">
-                    <div class="poke-card-big bg-${pokemon.types[0].type.name}">
-                    <h3>${pokemon.name.toUpperCase()}</h3>
-                    <img class="poke-img"src="${pokemon.sprites.other.home.front_default}" alt="pokemon-pic">
-                    <p>${pokemon.types[0].type.name}</p></div>
+                    <div class="poke-card-big bg-${pokemons.types[0].type.name}">
+                    <h3>${pokemons.name.toUpperCase()}</h3>
+                    <img class="poke-img"src="${pokemons.sprites.other.home.front_default}" alt="pokemon-pic">
+                    <p>${pokemons.types[0].type.name}</p></div>
                 </div>
     `;
 };

@@ -11,7 +11,7 @@ async function getPokemons() {
     let pokemonsObj = await responsPokemons.json();
     let detailPromises = pokemonsObj.results.map(async (pokemon) => (await fetch(pokemon.url)).json());
     detailsAboutPokemonsArr = await Promise.all(detailPromises);
-    render(detailsAboutPokemonsArr);
+    render();
     document.getElementById('loader').classList.add('d-none');
 };
 
@@ -26,9 +26,6 @@ function render() {
     mainContainerContentRef.innerHTML += detailsAboutPokemonsArr.map((pokemon) => pokeCardsTemplate(pokemon)).join('');    
 };
 
-console.log(detailsAboutPokemonsArr);
-
-
 function pokeCardsTemplate(pokemon) {
     return `
                <div class="poke-card bg-${pokemon.types[0].type.name}" onclick="overlayPokemons()">
@@ -39,7 +36,7 @@ function pokeCardsTemplate(pokemon) {
       `;
 };
 
-function overlayPokemons(detailsAboutPokemonsArr) {
+function overlayPokemons() {
     let overlayPokemonsContentRef = document.getElementById('overlay_pokemon');
     overlayPokemonsContentRef.innerHTML = detailsAboutPokemonsArr.map((pokemons) => pokeOverlayTemplate(pokemons)).join('');
 };

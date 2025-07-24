@@ -21,12 +21,15 @@ function getMorePokemons() {
     document.getElementById('btn').classList.toggle('d-none');
 };
 
-function render(detailsAboutPokemonsArr) {
+function render() {
     let mainContainerContentRef = document.getElementById('main_container');
-    mainContainerContentRef.innerHTML += detailsAboutPokemonsArr.map((pokemon) => pokeCardsTemplate(pokemon, detailsAboutPokemonsArr)).join('');    
+    mainContainerContentRef.innerHTML += detailsAboutPokemonsArr.map((pokemon) => pokeCardsTemplate(pokemon)).join('');    
 };
 
-function pokeCardsTemplate(pokemon, detailsAboutPokemonsArr) {
+console.log(detailsAboutPokemonsArr);
+
+
+function pokeCardsTemplate(pokemon) {
     return `
                <div class="poke-card bg-${pokemon.types[0].type.name}" onclick="overlayPokemons()">
                <h3>${pokemon.name.toUpperCase()}</h3>
@@ -37,10 +40,8 @@ function pokeCardsTemplate(pokemon, detailsAboutPokemonsArr) {
 };
 
 function overlayPokemons(detailsAboutPokemonsArr) {
-    console.log(detailsAboutPokemonsArr);
-    
-    let overlayPokemonContentRef = document.getElementById('overlay_pokemon');
-    overlayPokemonContentRef = detailsAboutPokemonsArr.map((pokemons) => pokeOverlayTemplate(pokemons)).join('');    
+    let overlayPokemonsContentRef = document.getElementById('overlay_pokemon');
+    overlayPokemonsContentRef.innerHTML = detailsAboutPokemonsArr.map((pokemons) => pokeOverlayTemplate(pokemons)).join('');
 };
 
 function pokeOverlayTemplate(pokemons) {

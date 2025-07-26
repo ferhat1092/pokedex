@@ -23,12 +23,12 @@ function getMorePokemons() {
 
 function render() {
     let mainContainerContentRef = document.getElementById('main_container');
-    mainContainerContentRef.innerHTML += detailsAboutPokemonsArr.map((pokemon) => pokeCardsTemplate(pokemon)).join('');    
+    mainContainerContentRef.innerHTML += detailsAboutPokemonsArr.map((pokemon, pokeIndex) => pokeCardsTemplate(pokemon, pokeIndex)).join('');    
 };
 
-function pokeCardsTemplate(pokemon) {
+function pokeCardsTemplate(pokemon, pokeIndex) {
     return `
-               <div class="poke-card bg-${pokemon.types[0].type.name}" onclick="overlayPokemons()">
+               <div class="poke-card bg-${pokemon.types[0].type.name}" onclick="overlayPokemons(${pokeIndex})">
                <h3>${pokemon.name.toUpperCase()}</h3>
                <img class="poke-img"src="${pokemon.sprites.other.home.front_default}" alt="pokemon-pic">
                <p>${pokemon.types[0].type.name}</p>
@@ -36,18 +36,19 @@ function pokeCardsTemplate(pokemon) {
       `;
 };
 
-function overlayPokemons() {
+function overlayPokemons(pokeIndex) {
     let overlayPokemonsContentRef = document.getElementById('overlay_pokemon');
-    overlayPokemonsContentRef.innerHTML = detailsAboutPokemonsArr.map((pokemons) => pokeOverlayTemplate(pokemons)).join('');
+    let pokemon =  detailsAboutPokemonsArr[pokeIndex]
+    overlayPokemonsContentRef.innerHTML = pokeOverlayTemplate(pokemon);
 };
 
-function pokeOverlayTemplate(pokemons) {
+function pokeOverlayTemplate(pokemon) {
     return `
                 <div class="overlay">
-                    <div class="poke-card-big bg-${pokemons.types[0].type.name}">
-                    <h3>${pokemons.name.toUpperCase()}</h3>
-                    <img class="poke-img"src="${pokemons.sprites.other.home.front_default}" alt="pokemon-pic">
-                    <p>${pokemons.types[0].type.name}</p></div>
+                    <div class="poke-card-big bg-${pokemon.types[0].type.name}">
+                    <h3>${pokemon.name.toUpperCase()}</h3>
+                    <img class="poke-img"src="${pokemon.sprites.other.home.front_default}" alt="pokemon-pic">
+                    <p>${pokemon.types[0].type.name}</p></div>
                 </div>
     `;
 };

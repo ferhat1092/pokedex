@@ -6,12 +6,20 @@ function init() {
 };
 
 async function getPokemons() {
-    document.getElementById('loader').classList.remove('d-none');
+    openLoader();
     let responsPokemons = await fetch(`https://pokeapi.co/api/v2/pokemon?limit=20&offset=${currentOffset}`);
     let pokemonsObj = await responsPokemons.json();
     let detailPromises = pokemonsObj.results.map(async (pokemon) => (await fetch(pokemon.url)).json());
     detailsAboutPokemonsArr = await Promise.all(detailPromises);
     render();
+    closeLoader()
+};
+
+function openLoader() {
+    document.getElementById('loader').classList.remove('d-none');
+};
+
+function closeLoader() {
     document.getElementById('loader').classList.add('d-none');
 };
 
@@ -23,7 +31,7 @@ function getMorePokemons() {
 
 function render() {
     let mainContainerContentRef = document.getElementById('main_container');
-    mainContainerContentRef.innerHTML += detailsAboutPokemonsArr.map((pokemon, pokeIndex) => pokeCardsTemplate(pokemon, pokeIndex)).join('');    
+    mainContainerContentRef.innerHTML += detailsAboutPokemonsArr.map((pokemon, pokeIndex) => pokeCardsTemplate(pokemon, pokeIndex)).join('');
 };
 
 function pokeCardsTemplate(pokemon, pokeIndex) {
@@ -38,17 +46,26 @@ function pokeCardsTemplate(pokemon, pokeIndex) {
 
 function overlayPokemons(pokeIndex) {
     let overlayPokemonsContentRef = document.getElementById('overlay_pokemon');
-    let pokemon =  detailsAboutPokemonsArr[pokeIndex]
+    let pokemon = detailsAboutPokemonsArr[pokeIndex]
     overlayPokemonsContentRef.innerHTML = pokeOverlayTemplate(pokemon);
+    openOverlay();
 };
+
+function openOverlay() {
+    document.getElementById('overlay_pokemon').classList.remove('d-none');
+}
 
 function pokeOverlayTemplate(pokemon) {
     return `
-                <div class="overlay">
+                <div class="overlay" onclick="closeOverlay()">
                     <div class="poke-card-big bg-${pokemon.types[0].type.name}">
                     <h3>${pokemon.name.toUpperCase()}</h3>
                     <img class="poke-img"src="${pokemon.sprites.other.home.front_default}" alt="pokemon-pic">
                     <p>${pokemon.types[0].type.name}</p></div>
                 </div>
     `;
+};
+
+function closeOverlay() {
+    document.getElementById('overlay_pokemon').classList.add('d-none');
 };

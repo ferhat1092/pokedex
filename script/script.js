@@ -1,4 +1,5 @@
 let currentOffset = 0;
+let currentPokeIndex = 0;
 let detailsAboutPokemonsArr = [];
 
 function init() {
@@ -7,12 +8,16 @@ function init() {
 
 async function getPokemons() {
     openLoader();
+    await fetchPokemons();
+    render();
+    closeLoader();
+};
+
+async function fetchPokemons() {
     let responsPokemons = await fetch(`https://pokeapi.co/api/v2/pokemon?limit=20&offset=${currentOffset}`);
     let pokemonsObj = await responsPokemons.json();
     let detailPromises = pokemonsObj.results.map(async (pokemon) => (await fetch(pokemon.url)).json());
     detailsAboutPokemonsArr = await Promise.all(detailPromises);
-    render();
-    closeLoader()
 };
 
 function openLoader() {
@@ -26,7 +31,6 @@ function closeLoader() {
 function getMorePokemons() {
     currentOffset += 20;
     getPokemons();
-    document.getElementById('btn').classList.toggle('d-none');
 };
 
 function render() {
@@ -45,8 +49,9 @@ function pokeCardsTemplate(pokemon, pokeIndex) {
 };
 
 function overlayPokemons(pokeIndex) {
+    currentPokeIndex = pokeIndex;
     let overlayPokemonsContentRef = document.getElementById('overlay_pokemon');
-    let pokemon = detailsAboutPokemonsArr[pokeIndex]
+    let pokemon = detailsAboutPokemonsArr[pokeIndex];
     overlayPokemonsContentRef.innerHTML = pokeOverlayTemplate(pokemon);
     openOverlay();
 };
@@ -58,13 +63,26 @@ function openOverlay() {
 function pokeOverlayTemplate(pokemon) {
     return `
                 <div class="overlay" onclick="closeOverlay()">
-                    <div class="poke-card-big bg-${pokemon.types[0].type.name}">
+                    <div class="poke-card-big bg-${pokemon.types[0].type.name}" onclick="event.stopPropagation()">
                     <h3>${pokemon.name.toUpperCase()}</h3>
                     <img class="poke-img"src="${pokemon.sprites.other.home.front_default}" alt="pokemon-pic">
-                    <p>${pokemon.types[0].type.name}</p></div>
+                    <p>${pokemon.types[0].type.name}</p>
+                    <button onclick="nextPokemon()">+</button>
+                    <button onclick="previousPokemon()">-</button>
+                    </div>
                 </div>
     `;
 };
+
+function nextPokemon() {
+    currentPokeIndex++;
+    overlayPokemons(currentPokeIndex);
+}
+
+function previousPokemon() {
+    currentPokeIndex--;
+    overlayPokemons(currentPokeIndex);
+}
 
 function closeOverlay() {
     document.getElementById('overlay_pokemon').classList.add('d-none');

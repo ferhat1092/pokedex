@@ -13,7 +13,10 @@
 </head>
 
 <body onload="init()">
-    <header>POKEDEX</header>
+    <header>POKEDEX
+        <input type="text" id="search_pokemon" placeholder="search for your Pokemon">
+        <button onclick="searchBar()">search</button>
+    </header>
     <section id="main_container" class="main-container">
         <div id="overlay_pokemon"></div>
         <div id="loader" class="overlay d-none">

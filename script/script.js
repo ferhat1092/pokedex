@@ -58,7 +58,8 @@ function overlayPokemons(pokeIndex) {
 
 function openOverlay() {
     document.getElementById('overlay_pokemon').classList.remove('d-none');
-}
+    document.body.classList.add('stop-scroll');
+};
 
 function pokeOverlayTemplate(pokemon) {
     return `
@@ -77,13 +78,22 @@ function pokeOverlayTemplate(pokemon) {
 function nextPokemon() {
     currentPokeIndex++;
     overlayPokemons(currentPokeIndex);
-}
+};
 
 function previousPokemon() {
     currentPokeIndex--;
     overlayPokemons(currentPokeIndex);
-}
+};
 
 function closeOverlay() {
     document.getElementById('overlay_pokemon').classList.add('d-none');
+    document.body.classList.remove('stop-scroll');
+};
+
+function searchBar() {
+    let searchPokemon = document.getElementById('search-pokemon').value;
+    detailsAboutPokemonsArr.types[0].type.name.filter((pokemon) =>
+       pokemon.includes(searchPokemon)
+    );
+    render();
 };

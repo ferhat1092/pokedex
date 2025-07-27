@@ -28,3 +28,7 @@ header {
 .d-none {
     display: none;
 }
+
+.stop-scroll {
+    overflow: hidden;
+}

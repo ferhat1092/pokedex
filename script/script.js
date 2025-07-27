@@ -33,9 +33,10 @@ function getMorePokemons() {
     getPokemons();
 };
 
-function render() {
+function render(pokemonList = detailsAboutPokemonsArr) {
     let mainContainerContentRef = document.getElementById('main_container');
-    mainContainerContentRef.innerHTML += detailsAboutPokemonsArr.map((pokemon, pokeIndex) => pokeCardsTemplate(pokemon, pokeIndex)).join('');
+    mainContainerContentRef.innerHTML = '';
+    mainContainerContentRef.innerHTML += pokemonList.map((pokemon, pokeIndex) => pokeCardsTemplate(pokemon, pokeIndex)).join('');
 };
 
 function pokeCardsTemplate(pokemon, pokeIndex) {
@@ -91,9 +92,14 @@ function closeOverlay() {
 };
 
 function searchBar() {
-    let searchPokemon = document.getElementById('search-pokemon').value;
-    detailsAboutPokemonsArr.types[0].type.name.filter((pokemon) =>
-       pokemon.includes(searchPokemon)
-    );
-    render();
+    let searchPokemon = document.getElementById('search_pokemon').value.toLowerCase();
+    if (searchPokemon.length < 3) {
+        render(detailsAboutPokemonsArr);
+        return;
+    } else {
+        let filterPokemon = detailsAboutPokemonsArr.filter((pokemon) =>
+            pokemon.name.toLowerCase().includes(searchPokemon)
+        );
+        render(filterPokemon);
+    };
 };

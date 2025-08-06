@@ -1,4 +1,4 @@
-let currentOffset = 0;
+let currentLimit = 40;
 let currentPokeIndex = 0;
 let detailsAboutPokemonsArr = [];
 
@@ -14,7 +14,7 @@ async function getPokemons() {
 };
 
 async function fetchPokemons() {
-    let responsPokemons = await fetch(`https://pokeapi.co/api/v2/pokemon?limit=20&offset=${currentOffset}`);
+    let responsPokemons = await fetch(`https://pokeapi.co/api/v2/pokemon?limit=${currentLimit}&offset=0`);
     let pokemonsObj = await responsPokemons.json();
     let detailPromises = pokemonsObj.results.map(async (pokemon) => (await fetch(pokemon.url)).json());
     detailsAboutPokemonsArr = await Promise.all(detailPromises);
@@ -29,7 +29,7 @@ function closeLoader() {
 };
 
 function getMorePokemons() {
-    currentOffset += 20;
+    currentLimit += 20;
     getPokemons();
 };
 

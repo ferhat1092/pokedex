@@ -1,4 +1,4 @@
-let currentLimit = 20;
+let currentLimit = 40;
 let currentPokeIndex = 0;
 let detailsAboutPokemonsArr = [];
 
@@ -49,19 +49,17 @@ function pokeCardsTemplate(pokemon, pokeIndex) {
       `;
 };
 
-function overlayPokemons(pokemonList = detailsAboutPokemonsArr, pokeIndex) {
+function overlayPokemons(pokeIndex, pokemonList = detailsAboutPokemonsArr) {
     currentPokeIndex = pokeIndex;
     let overlayPokemonsContentRef = document.getElementById('overlay_pokemon');
     let pokemon = pokemonList[pokeIndex];
     overlayPokemonsContentRef.innerHTML = pokeOverlayTemplate(pokemon);
-    console.log(pokemon);
-    
 };
 
 function openOverlay(pokeIndex) {
     document.getElementById('overlay_pokemon').classList.remove('d-none');
     document.body.classList.add('stop-scroll');
-    overlayPokemons(pokeIndex);
+    overlayPokemons(pokeIndex, undefined);
 };
 
 function pokeOverlayTemplate(pokemon) {
@@ -96,13 +94,13 @@ function closeOverlay() {
 function searchBar() {
     let searchPokemon = document.getElementById('search_pokemon').value.toLowerCase();
     if (searchPokemon.length < 3) {
-        render(detailsAboutPokemonsArr);
+        render();
         return;
     } else {
         let filterPokemon = detailsAboutPokemonsArr.filter((pokemon) =>
             pokemon.name.toLowerCase().includes(searchPokemon)
         );
         render(filterPokemon);
-        // overlayPokemons(filterPokemon);
+        overlayPokemons(undefined, filterPokemon);
     };
 };

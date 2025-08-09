@@ -1,4 +1,4 @@
-let currentLimit = 40;
+let currentLimit = 20;
 let currentPokeIndex = 0;
 let detailsAboutPokemonsArr = [];
 
@@ -41,7 +41,7 @@ function render(pokemonList = detailsAboutPokemonsArr) {
 
 function pokeCardsTemplate(pokemon, pokeIndex) {
     return `
-               <div class="poke-card bg-${pokemon.types[0].type.name}" onclick="overlayPokemons(${pokeIndex})">
+               <div class="poke-card bg-${pokemon.types[0].type.name}" onclick="openOverlay(${pokeIndex})">
                <h3>${pokemon.name.toUpperCase()}</h3>
                <img class="poke-img"src="${pokemon.sprites.other.home.front_default}" alt="pokemon-pic">
                <p>${pokemon.types[0].type.name}</p>
@@ -49,17 +49,19 @@ function pokeCardsTemplate(pokemon, pokeIndex) {
       `;
 };
 
-function overlayPokemons(pokeIndex) {
+function overlayPokemons(pokemonList = detailsAboutPokemonsArr, pokeIndex) {
     currentPokeIndex = pokeIndex;
     let overlayPokemonsContentRef = document.getElementById('overlay_pokemon');
-    let pokemon = detailsAboutPokemonsArr[pokeIndex];
+    let pokemon = pokemonList[pokeIndex];
     overlayPokemonsContentRef.innerHTML = pokeOverlayTemplate(pokemon);
-    openOverlay();
+    console.log(pokemon);
+    
 };
 
-function openOverlay() {
+function openOverlay(pokeIndex) {
     document.getElementById('overlay_pokemon').classList.remove('d-none');
     document.body.classList.add('stop-scroll');
+    overlayPokemons(pokeIndex);
 };
 
 function pokeOverlayTemplate(pokemon) {
@@ -101,5 +103,6 @@ function searchBar() {
             pokemon.name.toLowerCase().includes(searchPokemon)
         );
         render(filterPokemon);
+        // overlayPokemons(filterPokemon);
     };
 };

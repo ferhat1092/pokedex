@@ -14,15 +14,17 @@
 
 <body onload="init()">
     <header>POKEDEX
-        <input type="text" id="search_pokemon" placeholder="search for your Pokemon">
-        <button onclick="searchBar()">search</button>
+        <form onsubmit="searchBar(event)">
+            <input type="text" id="search_pokemon" placeholder="search for your Pokemon">
+            <button type="submit">search</button>
+        </form>
     </header>
     <section id="main_container" class="main-container">
     </section>
     <div id="overlay_pokemon"></div>
-        <div id="loader" class="overlay d-none">
-            <div class="loader-spinner"></div>
-             </div>
+    <div id="loader" class="overlay d-none">
+        <div class="loader-spinner"></div>
+    </div>
     <footer>
         <button id="btn" class="my-button" onclick="getMorePokemons()">Pokemon</button>
     </footer>

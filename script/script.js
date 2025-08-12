@@ -97,7 +97,8 @@ function closeOverlay() {
     document.body.classList.remove('stop-scroll');
 };
 
-function searchBar() {
+function searchBar(event) {
+    event.preventDefault();
     let searchPokemon = document.getElementById('search_pokemon').value.toLowerCase();
     if (searchPokemon.length < 3) {
         filterPokemon = [];

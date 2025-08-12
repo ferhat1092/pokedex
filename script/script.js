@@ -1,5 +1,6 @@
 let currentLimit = 40;
 let currentPokeIndex = 0;
+let pokemonList = [];
 let detailsAboutPokemonsArr = [];
 let filterPokemon = [];
 
@@ -10,7 +11,7 @@ function init() {
 async function getPokemons() {
     openLoader();
     await fetchPokemons();
-    render();
+    render(detailsAboutPokemonsArr);
     closeLoader();
 };
 
@@ -34,7 +35,8 @@ function getMorePokemons() {
     getPokemons();
 };
 
-function render(pokemonList = detailsAboutPokemonsArr) {
+function render(arr) {
+    pokemonList = arr;
     let mainContainerContentRef = document.getElementById('main_container');
     mainContainerContentRef.innerHTML = '';
     mainContainerContentRef.innerHTML += pokemonList.map((pokemon, pokeIndex) => pokeCardsTemplate(pokemon, pokeIndex)).join('');
@@ -83,13 +85,17 @@ function pokeOverlayTemplate(pokemon) {
 };
 
 function nextPokemon() {
-    currentPokeIndex++;
+    if (currentPokeIndex < pokemonList.length - 1) {
+        currentPokeIndex++;
+    };
     overlayPokemons(currentPokeIndex);
 };
 
 function previousPokemon() {
-    currentPokeIndex--;
-    overlayPokemons(currentPokeIndex);
+    if (currentPokeIndex > 0) {
+        currentPokeIndex--;
+    };
+        overlayPokemons(currentPokeIndex);
 };
 
 function closeOverlay() {
@@ -105,7 +111,7 @@ function searchBar(event) {
         render();
         return;
     } else {
-            filterPokemon = detailsAboutPokemonsArr.filter((pokemon) =>
+        filterPokemon = detailsAboutPokemonsArr.filter((pokemon) =>
             pokemon.name.toLowerCase().includes(searchPokemon)
         );
         render(filterPokemon);

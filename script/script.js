@@ -95,7 +95,7 @@ function previousPokemon() {
     if (currentPokeIndex > 0) {
         currentPokeIndex--;
     };
-        overlayPokemons(currentPokeIndex);
+    overlayPokemons(currentPokeIndex);
 };
 
 function closeOverlay() {
@@ -108,7 +108,7 @@ function searchBar(event) {
     let searchPokemon = document.getElementById('search_pokemon').value.toLowerCase();
     if (searchPokemon.length < 3) {
         filterPokemon = [];
-        render();
+        render(detailsAboutPokemonsArr);
         return;
     } else {
         filterPokemon = detailsAboutPokemonsArr.filter((pokemon) =>

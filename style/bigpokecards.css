@@ -1,0 +1,23 @@
+.poke-card-big {
+    height: 400px;
+    width: 240px;
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn-next-prv {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.btn {
+    background-color: rgba(0, 0, 0, 0.133);
+    height: 40px;
+    width: 64px;
+    margin: 0 24px 0 24px;
+    font-size: 32px;
+}

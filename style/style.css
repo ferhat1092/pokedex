@@ -1,3 +1,10 @@
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: grey;
+}
+
 .main-container {
     background-color: rgb(158, 158, 170);
     display: flex;
@@ -28,4 +35,5 @@ footer {
     justify-content: center;
     background-color: rgb(107, 76, 76);
     height: 80px;
+    background-color: grey;
 }

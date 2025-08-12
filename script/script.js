@@ -1,4 +1,4 @@
-let currentLimit = 40;
+let currentLimit = 20;
 let currentPokeIndex = 0;
 let pokemonList = [];
 let detailsAboutPokemonsArr = [];
@@ -42,16 +42,6 @@ function render(arr) {
     mainContainerContentRef.innerHTML += pokemonList.map((pokemon, pokeIndex) => pokeCardsTemplate(pokemon, pokeIndex)).join('');
 };
 
-function pokeCardsTemplate(pokemon, pokeIndex) {
-    return `
-               <div class="poke-card bg-${pokemon.types[0].type.name}" onclick="openOverlay(${pokeIndex})">
-               <h3>${pokemon.name.toUpperCase()}</h3>
-               <img class="poke-img"src="${pokemon.sprites.other.home.front_default}" alt="pokemon-pic">
-               <p>${pokemon.types[0].type.name}</p>
-               </div>
-      `;
-};
-
 function overlayPokemons(pokeIndex) {
     currentPokeIndex = pokeIndex;
     let overlayPokemonsContentRef = document.getElementById('overlay_pokemon');
@@ -68,20 +58,6 @@ function openOverlay(pokeIndex) {
     document.getElementById('overlay_pokemon').classList.remove('d-none');
     document.body.classList.add('stop-scroll');
     overlayPokemons(pokeIndex);
-};
-
-function pokeOverlayTemplate(pokemon) {
-    return `
-                <div class="overlay" onclick="closeOverlay()">
-                    <div class="poke-card-big bg-${pokemon.types[0].type.name}" onclick="event.stopPropagation()">
-                    <h3>${pokemon.name.toUpperCase()}</h3>
-                    <img class="poke-img"src="${pokemon.sprites.other.home.front_default}" alt="pokemon-pic">
-                    <p>${pokemon.types[0].type.name}</p>
-                    <button onclick="nextPokemon()">+</button>
-                    <button onclick="previousPokemon()">-</button>
-                    </div>
-                </div>
-    `;
 };
 
 function nextPokemon() {

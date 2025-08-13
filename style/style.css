@@ -48,3 +48,13 @@ footer {
     padding: 24px;
     background-color: grey;
 }
+
+@media (max-width: 480px) {
+    h1 {
+        display: none;
+    }
+
+    header {
+        justify-content: center;
+    }
+}

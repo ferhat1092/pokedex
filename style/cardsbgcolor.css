@@ -33,3 +33,19 @@
 .bg-fairy {
     background-color: rgb(212, 94, 228);
 }
+
+.bg-fighting {
+    background-color: rgb(94, 215, 228);
+}
+
+.bg-psychic {
+    background-color: rgb(168, 174, 83);
+}
+
+.bg-rock {
+    background-color: rgb(112, 105, 112);
+}
+
+.bg-ghost {
+    background-color: rgb(237, 191, 243);
+}

@@ -45,13 +45,8 @@ function render(arr) {
 function overlayPokemons(pokeIndex) {
     currentPokeIndex = pokeIndex;
     let overlayPokemonsContentRef = document.getElementById('overlay_pokemon');
-    if (pokemonList.length > 3) {
-        let pokemon = detailsAboutPokemonsArr[pokeIndex];
-        overlayPokemonsContentRef.innerHTML = pokeOverlayTemplate(pokemon);
-    } else {
-        let pokemon = filterPokemon[pokeIndex];
-        overlayPokemonsContentRef.innerHTML = pokeOverlayTemplate(pokemon);
-    };
+    let pokemon = pokemonList[pokeIndex];
+    overlayPokemonsContentRef.innerHTML = pokeOverlayTemplate(pokemon);
 };
 
 function openOverlay(pokeIndex) {

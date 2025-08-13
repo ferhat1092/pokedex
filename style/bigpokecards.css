@@ -1,6 +1,7 @@
 .poke-card-big {
+    color: white;
     height: 500px;
-    width: 240px;
+    width: 280px;
     border-radius: 16px;
     display: flex;
     flex-direction: column;
@@ -8,9 +9,24 @@
     align-items: center;
 }
 
+.big-poke-name {
+    text-transform: capitalize;
+}
+
+.big-poke-type {
+    text-transform: capitalize;
+}
+
 .big-poke-img {
     height: 120px;
-} 
+}
+
+.big-stats {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    width: 80%;
+}
 
 .btn-next-prv {
     display: flex;

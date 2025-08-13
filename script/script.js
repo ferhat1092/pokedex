@@ -45,7 +45,7 @@ function render(arr) {
 function overlayPokemons(pokeIndex) {
     currentPokeIndex = pokeIndex;
     let overlayPokemonsContentRef = document.getElementById('overlay_pokemon');
-    if (filterPokemon.length < 3) {
+    if (filterPokemon.length > 3) {
         let pokemon = detailsAboutPokemonsArr[pokeIndex];
         overlayPokemonsContentRef.innerHTML = pokeOverlayTemplate(pokemon);
     } else {

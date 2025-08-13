@@ -2,7 +2,17 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 24px;
     background-color: grey;
+}
+
+.search-input {
+    padding: 10px;
+    font-size: 16px;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    outline: none;
+    width: 250px;
 }
 
 .main-container {
@@ -35,5 +45,6 @@ footer {
     justify-content: center;
     background-color: rgb(107, 76, 76);
     height: 80px;
+    padding: 24px;
     background-color: grey;
 }

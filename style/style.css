@@ -7,6 +7,10 @@ header {
     height: 80px;
 }
 
+h1 {
+    padding-right: 16px;
+}
+
 .search-input {
     padding: 10px;
     font-size: 16px;

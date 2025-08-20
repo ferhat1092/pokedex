@@ -9,10 +9,10 @@ function init() {
 };
 
 async function getPokemons() {
-    openLoader();
+    openCloseLoader();
     await fetchPokemons();
     render(detailsAboutPokemonsArr);
-    closeLoader();
+    openCloseLoader();
 };
 
 async function fetchPokemons() {
@@ -22,12 +22,8 @@ async function fetchPokemons() {
     detailsAboutPokemonsArr = await Promise.all(detailPromises);
 };
 
-function openLoader() {
-    document.getElementById('loader').classList.remove('d-none');
-};
-
-function closeLoader() {
-    document.getElementById('loader').classList.add('d-none');
+function openCloseLoader() {
+    document.getElementById('loader').classList.toggle('d-none');
 };
 
 function getMorePokemons() {

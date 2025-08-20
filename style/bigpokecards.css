@@ -9,6 +9,27 @@
     align-items: center;
 }
 
+.btn-close-container {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 32px;
+}
+
+.btn-close {
+    background-color: grey;
+    height: 48px;
+    width: 48px;
+    border-radius: 100%;
+    border: 0px solid black;
+    cursor: pointer;
+    font-size: large;
+}
+
+.btn-close:hover {
+    background-color: rgb(188, 187, 187);
+}
+
 .big-poke-name {
     text-transform: capitalize;
 }

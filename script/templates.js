@@ -13,7 +13,11 @@ function pokeCardsTemplate(pokemon, pokeIndex) {
 function pokeOverlayTemplate(pokemon) {
     return `
                 <div class="overlay" onclick="closeOverlay()">
+
                     <div class="poke-card-big bg-${pokemon.types[0].type.name}" onclick="event.stopPropagation()">
+                      <div class="btn-close-container">
+                       <button class="btn-close" onclick="closeOverlay()">x</button>
+                      </div>
                       <h3 class="big-poke-name">${pokemon.name}</h3>
                       <img class="big-poke-img"src="${pokemon.sprites.other.home.front_default}" alt="pokemon-pic">
                       <div class="big-stats">
